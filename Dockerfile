@@ -22,4 +22,6 @@ RUN chmod -R 775 storage bootstrap/cache
 # expose port render
 EXPOSE 10000
 
+RUN php artisan config:clear && php artisan migrate --force
+
 CMD php artisan serve --host=0.0.0.0 --port=10000
