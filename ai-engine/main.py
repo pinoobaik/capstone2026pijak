@@ -11,7 +11,7 @@ app = FastAPI(title="Zero Waste Kitchen - AI Engine Indonesian Saved Model")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PATH_DATASET = os.path.join(BASE_DIR, 'all_cleaned_data.csv')
 PATH_VECTORIZER = os.path.join(BASE_DIR, 'vectorizer.pkl')
-PATH_MODEL_KNN = os.path.join(BASE_DIR, 'model.pkl')
+PATH_MODEL_KNN = os.path.join(BASE_DIR, 'model_knn.pkl')
 
 # Inisialisasi variabel global sebagai cadangan
 vectorizer = None
