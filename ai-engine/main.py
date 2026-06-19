@@ -224,3 +224,11 @@ def get_recommendation(payload: RecommendationRequest):
         "status": "success",
         "data": json_response
     }
+    
+@app.get("/")
+def health():
+    return {
+        "status": "running",
+        "model_loaded": model_knn is not None,
+        "dataset_loaded": not df.empty
+    }
