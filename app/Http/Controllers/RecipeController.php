@@ -18,7 +18,7 @@ class RecipeController extends Controller
 
         try {
             // Tembak API Python 
-            $response = Http::post('http://127.0.0.1:8001/rekomendasi', [
+            $response = $response = Http::post(env('ML_API_URL') . '/rekomendasi', [
                 'bahan_sisa' => $bahanSisa,
                 'jumlah_rekomendasi' => 3
             ]);
