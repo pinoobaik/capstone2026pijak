@@ -31,8 +31,11 @@ Route::get('/reset-password/{token}', [AuthController::class, 'tampilkanResetPas
 // Proses pembaruan password ke database MySQL
 Route::post('/reset-password', [AuthController::class, 'prosesResetPassword'])->name('password.update');
 
-Route::get('/ping', function () {
-    return response('OK', 200);
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'healthy',
+        'timestamp' => now()->toDateTimeString()
+    ]);
 });
 
 //  RUTE PROTEKSI (Hanya bisa diakses oleh USER YANG SUDAH LOGIN)

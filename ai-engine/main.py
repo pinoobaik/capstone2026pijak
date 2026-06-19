@@ -325,3 +325,7 @@ def health():
         "model_loaded": model_knn is not None,
         "dataset_loaded": not df.empty
     }
+    
+@app.get("/ping")
+def ping():
+    return Response(content="OK", media_type="text/plain")
