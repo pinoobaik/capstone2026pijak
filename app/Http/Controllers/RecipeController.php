@@ -18,10 +18,15 @@ class RecipeController extends Controller
 
         try {
             // Tembak API Python 
-            $response = $response = Http::post(env('ML_API_URL') . '/rekomendasi', [
+            $response = Http::timeout(60)->post(env('ML_API_URL') . '/rekomendasi', [
                 'bahan_sisa' => $bahanSisa,
                 'jumlah_rekomendasi' => 3
             ]);
+
+            dd(
+                $response->status(),
+                $response->body()
+            );
 
             if ($response->successful()) {
                 $hasilAI = $response->json();
