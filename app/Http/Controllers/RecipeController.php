@@ -18,15 +18,12 @@ class RecipeController extends Controller
 
         try {
             // Tembak API Python 
-            $response = Http::timeout(60)->post(env('ML_API_URL') . '/rekomendasi', [
-                'bahan_sisa' => $bahanSisa,
-                'jumlah_rekomendasi' => 3
-            ]);
-
-            dd(
-                $response->status(),
-                $response->body()
-            );
+            $response = Http::timeout(60)
+                ->withOptions(['verify' => false])
+                ->post(env('ML_API_URL') . '/rekomendasi', [
+                    'bahan_sisa' => $bahanSisa,
+                    'jumlah_rekomendasi' => 3
+                ]);
 
             if ($response->successful()) {
                 $hasilAI = $response->json();
@@ -63,8 +60,9 @@ class RecipeController extends Controller
             }
 
             return back()->with('error', 'Gagal mendapatkan rekomendasi.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Server AI belum aktif.');
+        }  catch (\Throwable $e) {
+            \Log::error('ML API error: ' . $e->getMessage());
+            return back()->with('error', 'Server AI tidak merespons.')->withInput();
         }
     }
 
